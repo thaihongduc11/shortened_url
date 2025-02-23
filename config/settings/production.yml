@@ -1,0 +1,2 @@
+protocol: 'http'
+host: ENV['HOST_SHORTENED_URL']
