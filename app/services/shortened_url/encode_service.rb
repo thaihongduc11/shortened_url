@@ -13,6 +13,7 @@ module ShortenedUrl
     def call
       return fail('URL is required') if @url.blank?
       return fail('Invalid URL') unless validate_params_url?(@url)
+      return fail('This URL is shortened') if shortened_url?
 
       existing_url = Url.find_by(original_url: @url)
       return success(short_url: existing_url.short_url) if existing_url.present?
@@ -38,6 +39,15 @@ module ShortenedUrl
       end
 
       nil
+    end
+
+    def shortened_url?
+      code = @url.split('/').last
+
+      url = Url.find_by(code:)
+      return false if url.blank?
+
+      url.short_url == @url.strip
     end
   end
 end

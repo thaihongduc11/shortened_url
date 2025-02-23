@@ -1,2 +1,2 @@
 protocol: 'http'
-host: ENV['HOST_SHORTENED_URL']
+host: <%= ENV['HOST_SHORTENED_URL'] %>
